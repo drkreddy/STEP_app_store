@@ -4,11 +4,21 @@
   "description": "It will hold all project made by STEP-2015 interns",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "Suman Maity",
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumanmaity112/STEP15Site.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sumanmaity112/STEP15Site/issues"
+  },
+  "homepage": "https://github.com/sumanmaity112/STEP15Site#readme"
 }
