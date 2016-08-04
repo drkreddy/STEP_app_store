@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="website">
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" src="controller/indexController.js"></script>
 </head>
 <body>
-    <p>Welcome</p>
-    <a href="/uploadNewProject"><button type="button">Submit</button></a>
-
+<div ng-include src="ui-helper/createData.html"></div>
 </body>
 </html>
