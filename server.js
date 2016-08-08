@@ -7,7 +7,7 @@ var pg = require("pg");
 var dbLib = require("./src/databaseManager.js");
 
 const TABLE_NAME = "projects";
-const ATTRIBUTES_DETAILS = ["projectName varchar(200)", "websiteLink varchar(300)", "briefDescription varchar(5000)", "sourceLink varchar(500)", "uploadBy varchar(200)", "uploadedOn DATE"];
+const ATTRIBUTES_DETAILS = ["projectName varchar(200)", "websiteLink varchar(300)", "briefDescription varchar(5000)", "sourceLink varchar(500)", "uploadBy varchar(200)", "uploadedOn timestamp"];
 const ATTRIBUTES = ["projectName", "websiteLink", "briefDescription", "sourceLink", "uploadBy", "uploadedOn"];
 const PORT = 8000;
 
@@ -32,7 +32,8 @@ var login = function (req, res) {
 };
 
 var submitProject = function (req, res, next) {
-    var values = [req.body.projectName, req.body.siteLink, req.body.briefDescription, req.body.sourceLink, req.cookies.username, moment(new Date().toISOString()).tz('Asia/Kolkata').format('DD-MM-YYYY hh:mma')];
+    var username = req.cookies.username || "";
+    var values = [req.body.projectName, req.body.siteLink, req.body.briefDescription, req.body.sourceLink, username, moment(new Date().toISOString()).tz('Asia/Kolkata').format('DD-MM-YYYY hh:mma')];
     dbLib.insertNewData(CLIENT, TABLE_NAME, ATTRIBUTES, values);
     res.redirect("/index.html")
 };

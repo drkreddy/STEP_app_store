@@ -1,11 +1,11 @@
 var dbLib = {};
 dbLib.createTable = function (client, tableName, attributesDetails) {
-    var query = "create table if not exists " + tableName + " ( " + attributesDetails.join() + ");";
+    var query = "create table if not exists " + tableName + " ( " + attributesDetails.join(",") + ");";
     this.runQuery(client, query);
 };
 
 dbLib.makeInsertQuery = function (tableName, attributes, values) {
-    return "insert into " + tableName + " (" + attributes.join(",") + ")" + " values (" + values.join(",") + ");";
+    return "insert into " + tableName + " (" + attributes.join(",") + ")" + " values ('" + values.join("','") + "');";
 };
 
 dbLib.insertNewData = function (client, tableName, attributes, values) {
