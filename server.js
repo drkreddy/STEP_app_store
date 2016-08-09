@@ -4,6 +4,8 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var moment = require("moment-timezone");
 var pg = require("pg");
+var passport = require("passport");
+var FacebookStrategy = require('passport-facebook').Strategy;
 var dbLib = require("./src/databaseManager.js");
 
 const TABLE_NAME = "projects";
@@ -17,8 +19,8 @@ var conString = process.env.PGSQL_CONSTRING;
 // connectionString syntax
 // 'pg://' + POSTGRESQL_DB_USERNAME + ':' + POSTGRESQL_DB_PASSWORD + '@' + POSTGRESQL_DB_HOST + ':' + POSTGRESQL_DB_PORT + '/'+ 'DATABASE_NAME';
 
-var CLIENT = new pg.Client(conString);
-CLIENT.connect();
+var client = new pg.Client(conString);
+client.connect();
 
 var setup = function (client, tableName, attributeDetails) {
     dbLib.createTable(client, tableName, attributeDetails);
@@ -34,7 +36,7 @@ var login = function (req, res) {
 var submitProject = function (req, res, next) {
     var username = req.cookies.username || "";
     var values = [req.body.projectName, req.body.siteLink, req.body.briefDescription, req.body.sourceLink, username, moment(new Date().toISOString()).tz('Asia/Kolkata').format('DD-MM-YYYY hh:mma')];
-    dbLib.insertNewData(CLIENT, TABLE_NAME, ATTRIBUTES, values);
+    dbLib.insertNewData(client, TABLE_NAME, ATTRIBUTES, values);
     res.redirect("/index.html")
 };
 
@@ -45,11 +47,38 @@ var retrieveAllProjects = function (client, tableName) {
     })
 };
 
+passport.use(new FacebookStrategy({
+        clientID: process.env.FACEBOOK_APP_ID,
+        clientSecret: process.env.FACEBOOK_APP_SECRET,
+        callbackURL: "http://localhost:8000/auth/facebook/callback",
+        profileFields: ['id', 'email', 'gender', 'name']
+    },
+    function (accessToken, refreshToken, profile, done) {
+        done(null, profile._raw);
+    }
+));
+
 app.use(cookieParser());
 
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static('HTML'));
+
+app.use(passport.initialize());
+passport.serializeUser(function (user, done) {
+    done(null, user);
+});
+
+app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {session: false, failureRedirect: "/login.html"}),
+    function (req, res) {
+        //Write the group login logic here
+        //if the user belongs to a specific group then redirect to /update.html
+        //else redirect to /rejection.html
+        res.redirect("/update.html");
+    });
 
 app.get("/uploadNewProject", function (req, res) {
     res.redirect("/login.html");
@@ -67,6 +96,6 @@ app.post("^/submit$", submitProject);
 var server = http.createServer(app);
 
 server.listen(PORT, function () {
-    setup(CLIENT, TABLE_NAME, ATTRIBUTES_DETAILS);
+    setup(client, TABLE_NAME, ATTRIBUTES_DETAILS);
     console.log("server is listening on port ", PORT);
 });
