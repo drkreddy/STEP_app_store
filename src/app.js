@@ -7,6 +7,7 @@ var moment = require("moment-timezone");
 
 var dbLib = require("./databaseManager.js");
 var constants = require("./constants.js");
+var library = require("./src/library.js");
 
 var app = express();
 
@@ -18,7 +19,9 @@ var login = function (req, res) {
 var submitProject = function (req, res, next) {
     var username = req.cookies.username || "";
     var values = [req.body.projectName, req.body.siteLink, req.body.briefDescription, req.body.sourceLink, username, moment(new Date().toISOString()).tz('Asia/Kolkata').format('DD-MM-YYYY hh:mma')];
-    dbLib.insertNewData(req.getClient(), constants.tableName, constants.attributes, values);
+    var client = req.getClient();
+    dbLib.insertNewData(client, constants.tableName, constants.attributes, values);
+    library.retrieveAllProjects(client, constants.tableName, req.projects);
     res.redirect("/index.html")
 };
 
