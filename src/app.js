@@ -30,12 +30,27 @@ var submitProject = function (req, res) {
     res.redirect("/index.html")
 };
 
-passport.use(new FacebookStrategy({
-        clientID: process.env.FACEBOOK_APP_ID,
-        clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL: "http://localhost:8000/auth/facebook/callback",
-        profileFields: ['id', 'email', 'gender', 'name']
-    },
+var chooseEnvironment = function () {
+    var details;
+    if (process.env.FACEBOOK_APP_ID) {
+        details = {
+            clientID: process.env.FACEBOOK_APP_ID,
+            clientSecret: process.env.FACEBOOK_APP_SECRET,
+        }
+    } else {
+        details = {
+            clientID: process.env.localFbId,
+            clientSecret: process.env.localFbSecret
+        }
+    }
+    details.callbackURL = "http://localhost:8000/auth/facebook/callback";
+    //For now callback url is same for both. But later it will be different,
+    // one is actual site domain and another for local domain
+    details.profileFields = ['id', 'email', 'gender', 'name'];
+    return details;
+};
+
+passport.use(new FacebookStrategy(chooseEnvironment(),
     function (accessToken, refreshToken, profile, done) {
         done(null, profile._raw);
     }
