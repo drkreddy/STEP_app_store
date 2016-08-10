@@ -7,7 +7,7 @@ var moment = require("moment-timezone");
 
 var dbLib = require("./databaseManager.js");
 var constants = require("./constants.js");
-var library = require("./src/library.js");
+var library = require("./library.js");
 
 var app = express();
 
