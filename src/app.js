@@ -12,11 +12,16 @@ var library = require("./src/library.js");
 var app = express();
 
 var login = function (req, res) {
-    res.cookie("username", req.body.username);
+    var details = JSON.parse(req.user);
+    //if req.user is undefined then it will throw an error
+    res.cookie('username', (details.first_name + " " + details.last_name), {
+        expires: new Date(Date.now() + 1000 * 60 * 15),
+        httpOnly: true
+    });
     res.redirect("/update.html");
 };
 
-var submitProject = function (req, res, next) {
+var submitProject = function (req, res) {
     var username = req.cookies.username || "";
     var values = [req.body.projectName, req.body.siteLink, req.body.briefDescription, req.body.sourceLink, username, moment(new Date().toISOString()).tz('Asia/Kolkata').format('DD-MM-YYYY hh:mma')];
     var client = req.getClient();
@@ -55,7 +60,7 @@ app.get('/auth/facebook/callback',
         //Write the group login logic here
         //if the user belongs to a specific group then redirect to /update.html
         //else redirect to /rejection.html
-        res.redirect("/update.html");
+        login(req, res);
     });
 
 app.get("/uploadNewProject", function (req, res) {
