@@ -5,10 +5,25 @@
     <title>Welcome</title>
     <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>-->
     <script src="libraries/http_ajax.googleapis.com_ajax_libs_angularjs_1.4.8_angular.js"></script>
+    <script src="fb.js"></script>
     <script src="init.js"></script>
     <script type="text/javascript" src="controller/indexController.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="login.js"></script>
 </head>
 <body>
 <div ng-include src="ui-helper/createData.html"></div>
+
+<div id="fb-root"></div>
+<div id="container">
+    <a href="/auth/facebook">
+        <button id="login_btn" onclick="login()">Login With Facebook</button>
+    </a>
+    <div id="login_status"></div>
+</div>
+<div id="errorMessage">
+
+</div>
+
 </body>
 </html>

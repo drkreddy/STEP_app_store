@@ -8,17 +8,15 @@ var moment = require("moment-timezone");
 var dbLib = require("./databaseManager.js");
 var constants = require("./constants.js");
 var library = require("./library.js");
-
+var groupLogin = require("./login.js");
+var fs = require("fs");
 var app = express();
 
+var groupId = "282099168624476";
+var logFile = "log.txt";
+
 var login = function (req, res) {
-    var details = JSON.parse(req.user);
-    //if req.user is undefined then it will throw an error
-    res.cookie('username', (details.first_name + " " + details.last_name), {
-        expires: new Date(Date.now() + 1000 * 60 * 15),
-        httpOnly: true
-    });
-    res.redirect("/update.html");
+    groupLogin(req, res, groupId);
 };
 
 var submitProject = function (req, res) {
@@ -35,7 +33,7 @@ var chooseEnvironment = function () {
     if (process.env.FACEBOOK_APP_ID) {
         details = {
             clientID: process.env.FACEBOOK_APP_ID,
-            clientSecret: process.env.FACEBOOK_APP_SECRET,
+            clientSecret: process.env.FACEBOOK_APP_SECRET
         }
     } else {
         details = {
@@ -48,6 +46,10 @@ var chooseEnvironment = function () {
     // one is actual site domain and another for local domain
     details.profileFields = ['id', 'email', 'gender', 'name'];
     return details;
+};
+
+var logUsers = function(userDetails){
+    fs.appendFile(logFile,userDetails,function(){});
 };
 
 passport.use(new FacebookStrategy(chooseEnvironment(),
@@ -63,6 +65,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('HTML'));
 
 app.use(passport.initialize());
+
+app.use(function(req,res,next){
+    console.log("requested url is -> ",req.url);
+    next();
+});
 passport.serializeUser(function (user, done) {
     done(null, user);
 });
@@ -72,10 +79,11 @@ app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {session: false, failureRedirect: "/login.html"}),
     function (req, res) {
-        //Write the group login logic here
-        //if the user belongs to a specific group then redirect to /update.html
-        //else redirect to /rejection.html
-        login(req, res);
+        var details = JSON.parse(req.user);
+        logUsers(JSON.stringify(details));
+        console.log(details);
+        library.setCookie(req, res, {key: "username", value: details.first_name + " " + details.last_name});
+        res.send();
     });
 
 app.get("/uploadNewProject", function (req, res) {

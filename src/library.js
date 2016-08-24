@@ -12,4 +12,15 @@ var setup = function (client, tableName, attributeDetails, projects) {
     retrieveAllProjects(client, tableName, projects)
 };
 
-module.exports = {setup: setup, retrieveAllProjects: retrieveAllProjects};
+var setCookie = function(req, res, details){
+    res.cookie(details.key, details.value, {
+        expires: new Date(Date.now() + 1000 * 60 * 15),
+        httpOnly: true
+    });
+};
+
+var clearCookie = function(req, res, field){
+    res.clearCookie(field);
+};
+
+module.exports = {setup: setup, retrieveAllProjects: retrieveAllProjects, setCookie: setCookie, clearCookie: clearCookie};
