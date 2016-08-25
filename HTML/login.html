@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="website">
 <head>
     <meta charset="UTF-8">
-    <title>login</title>
+    <title>Login</title>
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>-->
+    <script src="libraries/http_ajax.googleapis.com_ajax_libs_angularjs_1.4.8_angular.js"></script>
+    <script src="fb.js"></script>
+    <script src="init.js"></script>
+    <script type="text/javascript" src="controller/indexController.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"
+            integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="login.js"></script>
 </head>
 <body>
-<form action="login" method="post">
-    Username: <input type="text" name="username"><br>
-    Password: <input type="password" name="password">
-    <button>Submit</button>
-</form>
+<div ng-include src="ui-helper/createData.html"></div>
+
+<div id="fb-root"></div>
+<div id="container">
+    <button id="login_btn" onclick="login()">Login With Facebook</button>
+    <div id="login_status"></div>
+</div>
+<div id="errorMessage">
+
+</div>
+
 </body>
 </html>
