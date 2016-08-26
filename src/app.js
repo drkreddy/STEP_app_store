@@ -47,6 +47,14 @@ app.get("^/loginAs$", function (req, res) {
     res.send({name: req.cookies.username || ""})
 });
 
+app.get("^/logout$",function(req, res){
+    console.log("-------", req.cookies);
+    for(var cookieName in req.cookies){
+        library.clearCookie(req, res, cookieName);
+    }
+    res.redirect("/index.html");
+});
+
 app.post("^/login$", login);
 
 app.post("^/submit$", isAlreadyLogedIn, submitProject);
