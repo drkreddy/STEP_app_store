@@ -14,7 +14,6 @@ var groupId = "282099168624476";
 var logFileName = "log.txt";
 
 var login = function (req, res) {
-    library.logUsers(logFileName, JSON.stringify(req.body) + "\n");
     groupLogin(req, res, groupId);
 };
 
