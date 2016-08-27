@@ -1,0 +1,33 @@
+.waiting_dots {
+    height: 20px;
+    width: 20px;
+    background-color: gray;
+    margin-top: 20px;
+    margin-left: 20px;
+    float: left;
+}
+.selected_waiting_dot {
+    height: 20px;
+    width: 20px;
+    background-color: black;
+    margin-top: 20px;
+    margin-left: 20px;
+    float: left;
+}
+.waiting {
+    width: 150px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+#login-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+}
+
+#login-message h2{
+    text-align: center;
+}
