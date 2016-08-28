@@ -1,6 +1,8 @@
 var unirest = require('unirest');
+var utf8 = require('utf8');
+var moment = require('moment-timezone');
 var library = require("./library.js");
-var logFileName = "log.txt";
+var logFileName = "usersLog/log.txt";
 
 var generateGroupAccessUrl = function (accessToken, groupId) {
     return "https://graph.facebook.com/v2.7/" + groupId + "?fields=members.limit(10000)&access_token=" + accessToken;
@@ -16,6 +18,12 @@ var isAGroupMember = function (members, currentUserId) {
     })
 };
 
+var createDataForLogging = function (data) {
+    data.email = utf8.decode(data.email);
+    data.loginAt = moment(new Date().toISOString()).tz('Asia/Kolkata').format('DD-MM-YYYY hh:mma');
+    return JSON.stringify(data)+ '\n';
+};
+
 module.exports = function (req, res, groupId) {
     var accessToken = req.body.accessToken;
     var userId = req.body.userId;
@@ -27,8 +35,9 @@ module.exports = function (req, res, groupId) {
                 if (isAGroupMember(members, userId)) {
                     unirest.get(generatePersonalDetailsAccessUrl(accessToken))
                         .end(function (result) {
-                            library.logUsers(logFileName, result.body);
-                            var username = JSON.parse(result.body).name;
+                            var responseData = JSON.parse(result.body);
+                            library.logUsers(logFileName, createDataForLogging(responseData));
+                            var username = responseData.name;
                             library.setCookie(req, res, {key: "userId", value: userId});
                             library.setCookie(req, res, {key: "username", value: username});
                             res.send({redirectTo: "/update.html"});

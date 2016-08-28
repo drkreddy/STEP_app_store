@@ -14,8 +14,8 @@ dbLib.insertNewData = function (client, tableName, attributes, values) {
 };
 
 dbLib.makeRetrieveQuery = function (tableName, condition) {
-    condition = condition || "";
-    return "select * from " + tableName + " where " + condition + ";";
+    condition = condition ? " where " + condition : "";
+    return "select * from " + tableName + condition + ";";
 };
 
 dbLib.runQuery = function (client, query) {
