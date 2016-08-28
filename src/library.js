@@ -16,7 +16,8 @@ var setup = function (client, tableName, attributeDetails, projects) {
 var setCookie = function (req, res, details) {
     res.cookie(details.key, details.value, {
         expires: new Date(Date.now() + 1000 * 60 * 15),
-        httpOnly: true
+        httpOnly: true,
+        sameSite : true
     });
 };
 
@@ -29,10 +30,19 @@ var logUsers = function (logFileName, userDetails) {
     });
 };
 
+var updateCookies = function (req, res, next) {
+    var cookies = req.cookies;
+    for (var cookieName in cookies) {
+        setCookie(req, res, {key: cookieName, value: cookies[cookieName]});
+    }
+    next();
+};
+
 module.exports = {
     setup: setup,
     retrieveAllProjects: retrieveAllProjects,
     setCookie: setCookie,
     clearCookie: clearCookie,
-    logUsers: logUsers
+    logUsers: logUsers,
+    updateCookies: updateCookies
 };

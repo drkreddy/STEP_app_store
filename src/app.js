@@ -41,14 +41,16 @@ var getAllProjects = function (req, res) {
         if(err){
             res.status(500);
             res.redirect("/unexpectedIssue.html");
-        }
-        res.send(result.rows);
+        } else
+            res.send(result.rows);
     })
 };
 
 app.use(cookieParser());
 
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(library.updateCookies);
 
 app.get("/update.html", isAlreadyLogedIn);
 
@@ -73,7 +75,6 @@ app.get("^/personalDetails", function (req, res) {
 });
 
 app.get("^/logout$",function(req, res){
-    console.log("-------", req.cookies);
     for(var cookieName in req.cookies){
         library.clearCookie(req, res, cookieName);
     }
