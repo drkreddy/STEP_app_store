@@ -29,3 +29,11 @@
 li{
     list-style-type: none;
 }
+
+.white-text{
+    color: white;
+}
+
+.margin-top{
+    margin-top: 5%;
+}

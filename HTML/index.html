@@ -11,25 +11,42 @@
     <script type="text/javascript" src="controller/indexController.js"></script>
     <script type="text/javascript" src="factories/indexFactory.js"></script>
     <link rel="stylesheet" href="styles/index.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-<div>
-    <h2>Welcome {{username}}</h2>
-</div>
-<div>
-    <a href="/login.html" ng-if="!isLoggedIn"><button>Login</button></a>
-    <a href="/logout" ng-if="isLoggedIn"><button>Logout</button></a>
-</div>
-<div>
-    <a href="/update.html"><button>Upload New Project</button></a>
-</div>
-<div class="projects">
-    <div ng-repeat="project in projects" class="project">
-        <div class="projectName">{{project.projectname}}</div>
-        <div class="projectLink"><a href="{{project.websitelink}}">{{project.websitelink}}</a></div>
-        <li>{{project.sourcelink}}</li><br>
-        <li>{{project.uploadedon}}</li><br>
+<!-- <div class="container-fluid"> -->
+    <nav class="navbar navbar-fixed-top bg-warning">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">STEP 2015 Projects</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{username}}</a></li>
+                <li><a href="/login.html" ng-if="!isLoggedIn"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="/logout" ng-if="isLoggedIn"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+<!-- </div> -->
+<div class="container-fluid margin-top">
+    <div>
+        <a href="/update.html"><button>Upload New Project</button></a>
+    </div>
+    <div class="projects">
+        <div ng-repeat="project in projects" class="project">
+            <div class="projectName">{{project.projectname}}</div>
+            <div class="projectLink"><a href="{{project.websitelink}}">{{project.websitelink}}</a></div>
+            <li>{{project.sourcelink}}</li><br>
+            <li>{{project.uploadedon}}</li><br>
+        </div>
     </div>
 </div>
 
