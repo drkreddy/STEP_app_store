@@ -26,6 +26,7 @@ var submitProject = function (req, res) {
     var query = dbLib.makeInsertQuery(constants.tableName, constants.attributes, values);
     client.query(query,function(err, result){
        if(err){
+           library.createLog(constants.serverLogFileName,JSON.stringify(err)+"\n-----------------------\n");
            res.status(500);
            res.redirect("/unexpectedIssue.html");
        } else
@@ -39,6 +40,7 @@ var getAllProjects = function (req, res) {
     var retrieveQuery = dbLib.makeRetrieveQuery(constants.tableName);
     client.query(retrieveQuery, function (err, result) {
         if(err){
+            library.createLog(constants.serverLogFileName,JSON.stringify(err)+"\n-----------------------\n");
             res.status(500);
             res.redirect("/unexpectedIssue.html");
         } else

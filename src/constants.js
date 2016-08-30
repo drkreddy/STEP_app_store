@@ -3,5 +3,11 @@ const ATTRIBUTES_DETAILS = ["projectName varchar(200)", "websiteLink varchar(300
 const ATTRIBUTES = ["projectName", "websiteLink", "briefDescription", "sourceLink", "uploadBy", "uploadedOn"];
 
 module.exports = function () {
-    return {tableName: TABLE_NAME, attributeDetails: ATTRIBUTES_DETAILS, attributes: ATTRIBUTES};
+    return {
+        tableName: TABLE_NAME,
+        attributeDetails: ATTRIBUTES_DETAILS,
+        attributes: ATTRIBUTES,
+        serverLogFileName: "log/serverLog.txt",
+        usersLogFileName: "log/usersLog.txt"
+    };
 }();

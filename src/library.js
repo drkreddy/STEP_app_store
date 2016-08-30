@@ -25,8 +25,8 @@ var clearCookie = function (req, res, field) {
     res.clearCookie(field);
 };
 
-var logUsers = function (logFileName, userDetails) {
-    fs.appendFile(logFileName, userDetails, function () {
+var createLog = function (logFileName, data) {
+    fs.appendFile(logFileName, data, function () {
     });
 };
 
@@ -43,6 +43,6 @@ module.exports = {
     retrieveAllProjects: retrieveAllProjects,
     setCookie: setCookie,
     clearCookie: clearCookie,
-    logUsers: logUsers,
+    createLog: createLog,
     updateCookies: updateCookies
 };
