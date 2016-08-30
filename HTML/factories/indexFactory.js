@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('website')
+angular.module('StepAppStore.entrance')
     .factory('Projects', function($http){
         return {
             all: function(){

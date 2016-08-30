@@ -1,1 +1,2 @@
-var website = angular.module("website",[]);
+var StepAppStore = StepAppStore || {};
+StepAppStore.entrance = angular.module("StepAppStore.entrance",[]);

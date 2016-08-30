@@ -1,4 +1,4 @@
-website.controller("index",['$scope', '$http', 'Projects', function ($scope, $http, Projects) {
+StepAppStore.entrance.controller("StepAppStore.entrance.index",['$scope', '$http', 'Projects', function ($scope, $http, Projects) {
     $http.get("/loginAs").then(function (res) {
         $scope.loginName = res.data.name
     });
