@@ -10,7 +10,7 @@ module.exports = function () {
         tableName: TABLE_NAME,
         attributeDetails: ATTRIBUTES_DETAILS,
         attributes: ATTRIBUTES,
-        serverLogFileName: "log/serverLog.txt",
+        serverLogFileName: "log/serverErrorLog.txt",
         usersLogFileName: "log/usersLog.txt"
     };
 }();
