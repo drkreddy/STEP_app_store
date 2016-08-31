@@ -3,14 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Submit new project</title>
+    <!--<script src="libraries/http_code.jquery.com_jquery-3.1.0.js"></script>-->
+    <!--<script src="controller/updateController.js"></script>-->
 </head>
 <body>
 <form action="/submit" method="post">
-    Project name: <input type="text" name="projectName" required>
-    Project source link: <input type="text" name="sourceLink">
-    Brief description about project: <input type="text" name="briefDescription">
-    Project site link: <input type="text" name="siteLink">
-    <button>Submit</button>
+    Project name: <input type="text" name="projectName" required><br>
+    Project source link: <input type="text" id="sourceLink" name="sourceLink" pattern="^(?!https{0,1}:\/\/)\S*$"
+                                title="Provide your link without 'https://'" placeholder="eg: yoursourcelink.com"><br>
+    Brief description about project: <input type="text" name="briefDescription" id="briefDescription"
+                                            title="brief description about your project"><br>
+    Project site link: <input type="text" name="siteLink" id="siteLink" pattern="^(?!https{0,1}:\/\/)\S*$"
+                              title="Provide your link without 'https://'" placeholder="eg: yourwebsite.com"><br>
+    Used languages: <input type="text" name="usedLanguages" id="usedLanguages"
+                           title="Provide used languages in this project as CSV value" placeholder="eg: C, C++, Java"><br>
+    Used framework (modules): <input type="text" name="usedFrameworks" id="usedFrameworks"
+                           title="Provide used frameworks/modules in this project as CSV value" placeholder="eg: Express, Grunt, Spring MVC"><br>
+    Developed by: <input type="text" name="developedBy" id="developedBy"
+                         title="Provide project team members name as CSV value"> <br>
+    <input type="submit" value="submit"/>
 </form>
 </body>
 </html>

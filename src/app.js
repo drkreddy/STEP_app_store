@@ -21,15 +21,16 @@ var isAlreadyLogedIn = function (req, res, next) {
 
 var submitProject = function (req, res) {
     var username = req.cookies.username || "";
-    var values = [req.body.projectName, req.body.siteLink, req.body.briefDescription, req.body.sourceLink, username, new Date().toISOString()];
+    var body = req.body;
+    var values = [body.projectName, body.siteLink, body.briefDescription, body.sourceLink, body.usedLanguages, body.usedFrameworks, body.developedBy, username, new Date().toISOString()];
     var client = req.getClient();
     var query = dbLib.makeInsertQuery(constants.tableName, constants.attributes, values);
-    client.query(query,function(err, result){
-       if(err){
-           library.createLog(constants.serverLogFileName,JSON.stringify(err)+"\n-----------------------\n");
-           res.status(500);
-           res.redirect("/unexpectedIssue.html");
-       } else
+    client.query(query, function (err, result) {
+        if (err) {
+            library.createLog(constants.serverLogFileName, JSON.stringify(err) + "\n-----------------------\n");
+            res.status(500);
+            res.redirect("/unexpectedIssue.html");
+        } else
             res.redirect("/index.html")
     });
 };
@@ -39,8 +40,8 @@ var getAllProjects = function (req, res) {
     library.retrieveAllProjects(client, constants.tableName, req.projects);
     var retrieveQuery = dbLib.makeRetrieveQuery(constants.tableName);
     client.query(retrieveQuery, function (err, result) {
-        if(err){
-            library.createLog(constants.serverLogFileName,JSON.stringify(err)+"\n-----------------------\n");
+        if (err) {
+            library.createLog(constants.serverLogFileName, JSON.stringify(err) + "\n-----------------------\n");
             res.status(500);
             res.redirect("/unexpectedIssue.html");
         } else
@@ -62,22 +63,22 @@ app.get("/uploadNewProject", function (req, res) {
     res.redirect("/login.html");
 });
 
-app.get("/getAllProjects",getAllProjects);
+app.get("/getAllProjects", getAllProjects);
 
 app.get("^/loginAs$", function (req, res) {
     res.send({name: req.cookies.username || ""})
 });
 
-var isLoggedIn = function(cookies) {
+var isLoggedIn = function (cookies) {
     return !!(cookies.userId && cookies.username);
 };
 
 app.get("^/personalDetails", function (req, res) {
-    res.send({isLoggedIn: isLoggedIn(req.cookies), username : (req.cookies.username || "user")});
+    res.send({isLoggedIn: isLoggedIn(req.cookies), username: (req.cookies.username || "user")});
 });
 
-app.get("^/logout$",function(req, res){
-    for(var cookieName in req.cookies){
+app.get("^/logout$", function (req, res) {
+    for (var cookieName in req.cookies) {
         library.clearCookie(req, res, cookieName);
     }
     res.redirect("/index.html");
