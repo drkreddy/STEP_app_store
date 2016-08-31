@@ -30,6 +30,10 @@ var createLog = function (logFileName, data) {
     });
 };
 
+var modifyErrorForServerLog = function(err){
+    return JSON.stringify(err) + "\n-----------------------\n";
+};
+
 var updateCookies = function (req, res, next) {
     var cookies = req.cookies;
     for (var cookieName in cookies) {
@@ -44,5 +48,6 @@ module.exports = {
     setCookie: setCookie,
     clearCookie: clearCookie,
     createLog: createLog,
-    updateCookies: updateCookies
+    updateCookies: updateCookies,
+    manipulateError: modifyErrorForServerLog
 };

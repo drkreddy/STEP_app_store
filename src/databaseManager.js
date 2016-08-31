@@ -1,4 +1,7 @@
 var dbLib = {};
+var constants = require("./constants.js");
+var library = require("./library.js");
+
 dbLib.createTable = function (client, tableName, attributesDetails) {
     var query = "create table if not exists " + tableName + " ( " + attributesDetails.join(",") + ");";
     this.runQuery(client, query);
@@ -20,8 +23,9 @@ dbLib.makeRetrieveQuery = function (tableName, condition) {
 
 dbLib.runQuery = function (client, query) {
     client.query(query, function (err, result) {
-        if (err)
-            console.log(err, '----', query);
+        if (err){
+            library.createLog(constants.serverLogFileName, library.manipulateError(err));
+        }
     });
 };
 
