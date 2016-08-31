@@ -20,11 +20,10 @@
     <script type="text/javascript" src="libraries/http_maxcdn.bootstrapcdn.com_bootstrap_3.3.7_js_bootstrap.js"></script>
 </head>
 <body>
-<!-- <div class="container-fluid"> -->
     <nav class="navbar navbar-fixed-top bg-warning">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">STEP 2015 Projects</a>
+                <a class="navbar-brand" href="#">STEP Projects</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{username}}</a></li>
@@ -33,17 +32,22 @@
             </ul>
         </div>
     </nav>
-<!-- </div> -->
 <div class="container-fluid margin-top">
     <div>
         <a href="/update.html"><button>Upload New Project</button></a>
     </div>
-    <div class="projects">
-        <div ng-repeat="project in projects" class="project">
-            <div class="projectName">{{project.projectname}}</div>
-            <div class="projectLink"><a href="{{project.websitelink}}">{{project.websitelink}}</a></div>
-            <li>{{project.sourcelink}}</li><br>
-            <li>{{project.uploadedon}}</li><br>
+    <div class="row card-row">
+        <div class="card col-xs-12 col-sm-6 col-md-3" ng-repeat="project in projects">
+            <div class="inner">
+                <div class="card-block">
+                    <h4 class="card-title">{{project.projectname}}</h4>
+                    <div class="card-description">{{project.briefdescription}}</div>
+                </div>
+                <div class="card-block">
+                    <a href="{{project.websitelink}}" class="card-link small-char">Game here</a>
+                    <a href="{{project.sourcelink}}" class="card-link small-char">Code here</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
