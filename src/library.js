@@ -1,5 +1,4 @@
 var dbLib = require("./databaseManager.js");
-var fs = require("fs");
 
 var retrieveAllProjects = function (client, tableName, projects) {
     var retrieveQuery = dbLib.makeRetrieveQuery(tableName);
@@ -25,14 +24,6 @@ var clearCookie = function (req, res, field) {
     res.clearCookie(field);
 };
 
-var createLog = function (logFileName, data) {
-    fs.appendFile(logFileName, data, function () {
-    });
-};
-
-var modifyErrorForServerLog = function(err){
-    return JSON.stringify(err) + "\n-----------------------\n";
-};
 
 var updateCookies = function (req, res, next) {
     var cookies = req.cookies;
@@ -47,7 +38,5 @@ module.exports = {
     retrieveAllProjects: retrieveAllProjects,
     setCookie: setCookie,
     clearCookie: clearCookie,
-    createLog: createLog,
-    updateCookies: updateCookies,
-    manipulateError: modifyErrorForServerLog
+    updateCookies: updateCookies
 };

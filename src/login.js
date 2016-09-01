@@ -1,7 +1,7 @@
 var unirest = require('unirest');
-var utf8 = require('utf8');
 var moment = require('moment-timezone');
 var library = require("./library.js");
+var logger = ("./logger.js");
 var constants = require("./constants.js");
 var logFileName = "usersLog/usersLog.txt";
 
@@ -19,12 +19,6 @@ var isAGroupMember = function (members, currentUserId) {
     })
 };
 
-var createDataForLogging = function (data) {
-    data.email = utf8.decode(data.email);
-    data.loginAt = moment(new Date().toISOString()).tz('Asia/Kolkata').format('DD-MM-YYYY hh:mma');
-    return JSON.stringify(data)+ '\n';
-};
-
 module.exports = function (req, res, groupId) {
     var accessToken = req.body.accessToken;
     var userId = req.body.userId;
@@ -37,7 +31,7 @@ module.exports = function (req, res, groupId) {
                     unirest.get(generatePersonalDetailsAccessUrl(accessToken))
                         .end(function (result) {
                             var responseData = JSON.parse(result.body);
-                            library.createLog(constants.usersLogFileName, createDataForLogging(responseData));
+                            logger.createLog(constants.usersLogFileName, logger.createDataForLogging(responseData));
                             var username = responseData.name;
                             library.setCookie(req, res, {key: "userId", value: userId});
                             library.setCookie(req, res, {key: "username", value: username});

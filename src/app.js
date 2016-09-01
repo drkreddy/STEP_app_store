@@ -6,6 +6,7 @@ var dbLib = require("./databaseManager.js");
 var constants = require("./constants.js");
 var library = require("./library.js");
 var groupLogin = require("./login.js");
+var logger = require("./logger.js");
 
 var app = express();
 
@@ -27,7 +28,7 @@ var submitProject = function (req, res) {
     var query = dbLib.makeInsertQuery(constants.tableName, constants.attributes, values);
     client.query(query, function (err, result) {
         if (err) {
-            library.createLog(constants.serverLogFileName, library.manipulateError(err));
+            logger.createLog(constants.serverLogFileName, logger.manipulateError(err));
             res.status(500);
             res.redirect("/unexpectedIssue.html");
         } else
@@ -41,7 +42,7 @@ var getAllProjects = function (req, res) {
     var retrieveQuery = dbLib.makeRetrieveQuery(constants.tableName);
     client.query(retrieveQuery, function (err, result) {
         if (err) {
-            library.createLog(constants.serverLogFileName, library.manipulateError(err));
+            logger.createLog(constants.serverLogFileName, logger.manipulateError(err));
             res.status(500);
             res.redirect("/unexpectedIssue.html");
         } else
