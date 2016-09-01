@@ -1,7 +1,7 @@
 var unirest = require('unirest');
 var moment = require('moment-timezone');
 var library = require("./library.js");
-var logger = ("./logger.js");
+var logger = require("./logger.js");
 var constants = require("./constants.js");
 var logFileName = "usersLog/usersLog.txt";
 
