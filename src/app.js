@@ -1,6 +1,7 @@
 var express = require("express");
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
+var bodyParser = require("body-parser");
+var cookieParser = require("cookie-parser");
+var uuid = require("uuid");
 
 var dbLib = require("./databaseManager.js");
 var constants = require("./constants.js");
@@ -23,7 +24,7 @@ var isAlreadyLogedIn = function (req, res, next) {
 var submitProject = function (req, res) {
     var username = req.cookies.username || "";
     var body = req.body;
-    var values = [body.projectName, body.siteLink, body.briefDescription, body.sourceLink, body.usedLanguages, body.usedFrameworks, body.developedBy, username, new Date().toISOString()];
+    var values = [uuid.v4(), body.projectName, body.siteLink, body.briefDescription, body.sourceLink, body.usedLanguages, body.usedFrameworks, body.developedBy, username, new Date().toISOString()];
     var client = req.getClient();
     var query = dbLib.makeInsertQuery(constants.tableName, constants.attributes, values);
     client.query(query, function (err, result) {
