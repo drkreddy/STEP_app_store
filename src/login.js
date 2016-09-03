@@ -35,7 +35,7 @@ module.exports = function (req, res, groupId) {
                             var username = responseData.name;
                             library.setCookie(req, res, {key: "userId", value: userId});
                             library.setCookie(req, res, {key: "username", value: username});
-                            res.send({redirectTo: "/update.html"});
+                            res.send({redirectTo: "/uploadNewProject.html"});
                         });
                 } else {
                     res.send({redirectTo: "/rejection.html"});
