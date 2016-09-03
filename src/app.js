@@ -29,7 +29,7 @@ var submitProject = function (req, res) {
     var query = dbLib.makeInsertQuery(constants.tableName, constants.attributes, values);
     client.query(query, function (err, result) {
         if (err) {
-            logger.createLog(constants.serverLogFileName, logger.manipulateError(err));
+            logger.createLog(constants.serverLogFileName, logger.manipulateError(err,query));
             res.status(500);
             res.redirect("/unexpectedIssue.html");
         } else
@@ -37,18 +37,26 @@ var submitProject = function (req, res) {
     });
 };
 
-var getAllProjects = function (req, res) {
-    var client = req.getClient();
-    library.retrieveAllProjects(client, constants.tableName, req.projects);
-    var retrieveQuery = dbLib.makeRetrieveQuery(constants.tableName);
-    client.query(retrieveQuery, function (err, result) {
+var getProjects = function (client, query, res) {
+    client.query(query, function (err, result) {
         if (err) {
-            logger.createLog(constants.serverLogFileName, logger.manipulateError(err));
+            logger.createLog(constants.serverLogFileName, logger.manipulateError(err, query));
             res.status(500);
             res.redirect("/unexpectedIssue.html");
         } else
             res.send(result.rows);
     })
+};
+
+var getAllProjects = function (req, res) {
+    var retrieveQuery = dbLib.makeRetrieveQuery(constants.tableName);
+    getProjects(req.getClient(), retrieveQuery, res);
+};
+
+var getSpecificProject = function (req, res) {
+    var condition = "uuid='" + req.params.uuid + "'";
+    var query = dbLib.makeRetrieveQuery(constants.tableName, condition);
+    getProjects(req.getClient(), query, res);
 };
 
 app.use(cookieParser());
@@ -66,6 +74,8 @@ app.get("/uploadNewProject", function (req, res) {
 });
 
 app.get("/getAllProjects", getAllProjects);
+
+app.get("^/project/:uuid$", getSpecificProject);
 
 app.get("^/loginAs$", function (req, res) {
     res.send({name: req.cookies.username || ""})
