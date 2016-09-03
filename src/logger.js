@@ -7,8 +7,12 @@ var createLog = function (logFileName, data) {
     });
 };
 
-var modifyErrorForServerLog = function (err) {
-    return JSON.stringify(err) + "\n-----------------------\n";
+var modifyErrorForServerLog = function (err, query) {
+    return JSON.stringify({
+            message: err.message,
+            query: query,
+            stackTrace: err.stack
+        }) + "\n***************************\n";
 };
 
 var createDataForLogging = function (data) {

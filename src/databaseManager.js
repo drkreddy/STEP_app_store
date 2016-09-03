@@ -24,7 +24,7 @@ dbLib.makeRetrieveQuery = function (tableName, condition) {
 dbLib.runQuery = function (client, query) {
     client.query(query, function (err, result) {
         if (err){
-            logger.createLog(constants.serverLogFileName, logger.manipulateError(err));
+            logger.createLog(constants.serverLogFileName, logger.manipulateError(err, query));
         }
     });
 };
