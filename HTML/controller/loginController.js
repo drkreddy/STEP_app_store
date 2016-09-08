@@ -1,12 +1,12 @@
-window.onload = function(){
+window.onload = function () {
     $("#login-message").hide();
 };
-var waiting = function(){
+var waiting = function () {
     var count = 0;
-    return function(){
-        $('#dot_'+count).removeClass("selected_waiting_dot");
-        count = (count+1)%3;
-        $('#dot_'+count).addClass("selected_waiting_dot");
+    return function () {
+        $('#dot_' + count).removeClass("selected_waiting_dot");
+        count = (count + 1) % 3;
+        $('#dot_' + count).addClass("selected_waiting_dot");
     };
 }();
 
@@ -23,6 +23,7 @@ var login = function () {
 
             setInterval(waiting, 500);
             $('#container').hide();
+            $('#myModalLabel').hide();
             $("#login-message").show();
             console.log('Welcome!  Fetching your information.... ');
             jQuery.post("/login", {
