@@ -34,6 +34,7 @@
                 <a class="navbar-brand" href="#"><span><img src="images/logo.png" alt="StepAppsStore" height="25"></span></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
+                <li id="uploadNewProject"><a href="/uploadNewProject.html"><span class="glyphicon glyphicon-cloud-upload"></span> Upload New Project</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{username}}</a></li>
                 <li><a ng-if="!isLoggedIn" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 <li><a href="/logout" ng-if="isLoggedIn"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
@@ -41,9 +42,6 @@
         </div>
     </nav>
 <div class="container-fluid margin-top">
-    <div>
-        <a href="/uploadNewProject.html"><button>Upload New Project</button></a>
-    </div>
     <div class="row card-row">
         <div class="card col-xs-12 col-sm-6 col-md-3" ng-repeat="project in projects">
             <div class="inner">
