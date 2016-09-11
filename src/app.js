@@ -79,7 +79,7 @@ var isLoggedIn = function (cookies) {
 };
 
 app.get("^/personalDetails$", function (req, res) {
-    res.send({isLoggedIn: isLoggedIn(req.cookies), username: (req.cookies.username || "user")});
+    res.send({isLoggedIn: isLoggedIn(req.cookies), username: (req.cookies.username || "user"), userId: req.cookies.userId});
 });
 
 app.get("^/logout$", function (req, res) {

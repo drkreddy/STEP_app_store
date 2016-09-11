@@ -9,6 +9,7 @@ StepAppStore.entrance.controller("StepAppStore.entrance.index", ['$scope', '$htt
     $.get("/personalDetails", function (data) {
         $scope.isLoggedIn = data.isLoggedIn;
         $scope.username = data.username;
+        $scope.userId = data.userId;
     });
     $scope.getDetails = function (uuid) {
         Projects.getDetails(uuid).then(function (details) {
