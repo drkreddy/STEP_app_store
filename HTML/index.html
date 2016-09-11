@@ -53,6 +53,9 @@
                     <a  ng-if="project.websitelink != ''" href="{{project.websitelink}}" target="_blank" class="card-link small-char">Game here</a>
                     <a ng-if="project.sourceLink != ''" href="{{project.sourcelink}}" target="_blank" class="card-link small-char">Code here</a>
                 </div>
+                <div class="details">
+                    <a data-toggle="modal" data-target="#details-modal" ng-click="getDetails(project.uuid)"> Details...</a>
+                </div>
             </div>
         </div>
     </div>
@@ -62,8 +65,8 @@
     <!-- MODAL FOR LOGIN -->
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="panel">
+                <div class="panel-heading">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="myModalLabel">Login here</h4>
                 </div>
@@ -84,6 +87,57 @@
                 </div>
                 <div class="modal-footer">
                     <!-- Forgot password ? Click here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- MODAL DETAILS ABOUT A PROJECT -->
+    <div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="panel">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="detailsModalLabel">{{details.projectname}}</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td>Brief description</td>
+                            <td>{{details.briefdescription}}</td>
+                        </tr>
+                        <tr ng-if="details.sourceLink != ''">
+                            <td>Project source link</td>
+                            <td><a href="{{details.sourcelink}}"><span class="glyphicon glyphicon-link"></span> {{details.sourcelink}}</a></td>
+                        </tr>
+                        <tr ng-if="details.websitelink != ''">
+                            <td>Project site link</td>
+                            <td><a href="{{details.websitelink}}"><span class="glyphicon glyphicon-link"></span> {{details.websitelink}}</a></td>
+                        </tr>
+                        <tr>
+                            <td>Used languages</td>
+                            <td>{{details.usedlanguages}}</td>
+                        </tr>
+                        <tr ng-if="details.usedframeworks != ''">
+                            <td>Used framework (modules)</td>
+                            <td>{{details.usedframeworks}}</td>
+                        </tr>
+                        <tr>
+                            <td>Developed by</td>
+                            <td>{{details.developedby}}</td>
+                        </tr>
+                        <tr>
+                            <td>Upload by</td>
+                            <td>{{details.uploadby}}</td>
+                        </tr>
+                        <tr>
+                            <td>Uploaded on</td>
+                            <td>{{details.uploadedon}}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
