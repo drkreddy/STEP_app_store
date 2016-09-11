@@ -1,0 +1,38 @@
+h1 {
+    font-size: 22px;
+    color: rgba(0, 0, 0, 0.80);
+}
+
+.name a.names:hover {
+    color: #4078c0;
+    text-decoration: none;
+}
+
+.name {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.contacts {
+    text-decoration: none;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.90);
+    line-height: 2.2;
+}
+
+.contacts:hover {
+    color: #4078c0;
+    text-decoration: none;
+}
+
+.contactBody {
+    padding-top: calc(8% - 1em);
+    padding-left: calc(18% - 1em);
+    padding-right: calc(18% - 1em);
+}
+
+.email {
+    padding-top: calc(5% - 1em);
+    padding-left: calc(40% - 1em);
+    padding-right: calc(40% - 1em);
+}
