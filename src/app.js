@@ -73,10 +73,6 @@ app.get("^/getAllProjects$", getAllProjects);
 
 app.get("^/project/:uuid$", getSpecificProject);
 
-app.get("^/loginAs$", function (req, res) {
-    res.send({name: req.cookies.username || ""})
-});
-
 var isLoggedIn = function (cookies) {
     return !!(cookies.userId && cookies.username);
 };

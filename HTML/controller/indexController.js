@@ -1,7 +1,4 @@
 StepAppStore.entrance.controller("StepAppStore.entrance.index", ['$scope', '$http', 'Projects', function ($scope, $http, Projects) {
-    $http.get("/loginAs").then(function (res) {
-        $scope.loginName = res.data.name
-    });
     $scope.projects = [];
     Projects.all().then(function (projects) {
         projects.forEach(function (project) {
