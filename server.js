@@ -19,6 +19,9 @@ var controller = requestHandler(projects, client);
 var server = http.createServer(controller);
 
 server.listen(PORT, IP_ADDRESS, function () {
-    library.setup(client, constants.tableName, constants.attributeDetails, projects);
+    var tables = constants.getAllTablesDetails();
+    tables.forEach(function(table){
+        library.setup(client, table.name, table.attributeDetails);
+    });
     console.log("server is listening on port ", PORT);
 });

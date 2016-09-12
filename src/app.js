@@ -38,14 +38,14 @@ var submitProject = function (req, res) {
     var userId = req.cookies.userId || "";
     var body = req.body;
     var values = [uuid.v4(), body.projectName, body.siteLink, body.briefDescription, body.sourceLink, body.usedLanguages, body.usedFrameworks, body.developedBy, username, new Date().toISOString(), userId];
-    var query = dbLib.makeInsertQuery(constants.tableName, constants.attributes, values);
+    var query = dbLib.makeInsertQuery(constants.projectTableName, constants.projectTableAttributes, values);
     insertToDB(req, res, query);
 };
 
 var updateProject = function (req, res) {
     var body = req.body;
     var values = [body.projectName, body.siteLink, body.briefDescription, body.sourceLink, body.usedLanguages, body.usedFrameworks, body.developedBy, new Date().toISOString()];
-    var query = dbLib.makeUpdateQuery(constants.tableName, constants.projectTableEditableAttributes, values, req.params.uuid);
+    var query = dbLib.makeUpdateQuery(constants.projectTableName, constants.projectTableEditableAttributes, values, req.params.uuid);
     console.log(query);
     insertToDB(req, res, query)
 };
@@ -62,13 +62,13 @@ var getProjects = function (client, query, res) {
 };
 
 var getAllProjects = function (req, res) {
-    var retrieveQuery = dbLib.makeRetrieveQuery(constants.tableName);
+    var retrieveQuery = dbLib.makeRetrieveQuery(constants.projectTableName);
     getProjects(req.getClient(), retrieveQuery, res);
 };
 
 var getSpecificProject = function (req, res) {
     var condition = "uuid='" + req.params.uuid + "'";
-    var query = dbLib.makeRetrieveQuery(constants.tableName, condition);
+    var query = dbLib.makeRetrieveQuery(constants.projectTableName, condition);
     getProjects(req.getClient(), query, res);
 };
 
