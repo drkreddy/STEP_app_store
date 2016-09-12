@@ -21,21 +21,33 @@ var isAlreadyLogedIn = function (req, res, next) {
     (req.cookies.userId && req.cookies.username) ? next() : res.redirect("/login.html");
 };
 
-var submitProject = function (req, res) {
-    var username = req.cookies.username || "";
-    var userId = req.cookies.userId || "";
-    var body = req.body;
-    var values = [uuid.v4(), body.projectName, body.siteLink, body.briefDescription, body.sourceLink, body.usedLanguages, body.usedFrameworks, body.developedBy, username, new Date().toISOString(), userId];
+var insertToDB = function (req, res, query) {
     var client = req.getClient();
-    var query = dbLib.makeInsertQuery(constants.tableName, constants.attributes, values);
     client.query(query, function (err, result) {
         if (err) {
-            logger.createLog(constants.serverLogFileName, logger.manipulateError(err,query));
+            logger.createLog(constants.serverLogFileName, logger.manipulateError(err, query));
             res.status(500);
             res.redirect("/unexpectedIssue.html");
         } else
             res.redirect("/index.html")
     });
+};
+
+var submitProject = function (req, res) {
+    var username = req.cookies.username || "";
+    var userId = req.cookies.userId || "";
+    var body = req.body;
+    var values = [uuid.v4(), body.projectName, body.siteLink, body.briefDescription, body.sourceLink, body.usedLanguages, body.usedFrameworks, body.developedBy, username, new Date().toISOString(), userId];
+    var query = dbLib.makeInsertQuery(constants.tableName, constants.attributes, values);
+    insertToDB(req, res, query);
+};
+
+var updateProject = function (req, res) {
+    var body = req.body;
+    var values = [body.projectName, body.siteLink, body.briefDescription, body.sourceLink, body.usedLanguages, body.usedFrameworks, body.developedBy, new Date().toISOString()];
+    var query = dbLib.makeUpdateQuery(constants.tableName, constants.projectTableEditableAttributes, values, req.params.uuid);
+    console.log(query);
+    insertToDB(req, res, query)
 };
 
 var getProjects = function (client, query, res) {
@@ -92,5 +104,7 @@ app.get("^/logout$", function (req, res) {
 app.post("^/login$", login);
 
 app.post("^/submit$", isAlreadyLogedIn, submitProject);
+
+app.post("^/submit/project/:uuid$", isAlreadyLogedIn, updateProject);
 
 module.exports = app;

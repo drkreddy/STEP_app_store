@@ -21,6 +21,15 @@ dbLib.makeRetrieveQuery = function (tableName, condition) {
     return "select * from " + tableName + condition + ";";
 };
 
+dbLib.makeUpdateQuery = function (tableName, attributes, values, uuid) {
+    var query = "update " + tableName + " set ";
+    for (var index = 0; index < attributes.length; index++) {
+        query += attributes[index] + "='" + values + "' ";
+    }
+    query += "where uuid='" + uuid + "';";
+    return query;
+};
+
 dbLib.runQuery = function (client, query) {
     client.query(query, function (err, result) {
         if (err){

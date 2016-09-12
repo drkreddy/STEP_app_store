@@ -5,11 +5,15 @@ const ATTRIBUTES_DETAILS = ["uuid UUID PRIMARY KEY", "projectName varchar(200)",
 const ATTRIBUTES = ["uuid", "projectName", "websiteLink", "briefDescription", "sourceLink",
     "usedLanguages", "usedFrameworks", "developedBy", "uploadBy", "uploadedOn", "uploadedByUserId"];
 
+const PROJECT_TABLE_EDITABLE_ATTRIBUTES = ["projectName", "websiteLink", "briefDescription", "sourceLink",
+    "usedLanguages", "usedFrameworks", "developedBy", "uploadedOn"];
+
 module.exports = function () {
     return {
         tableName: TABLE_NAME,
         attributeDetails: ATTRIBUTES_DETAILS,
         attributes: ATTRIBUTES,
+        projectTableEditableAttributes: PROJECT_TABLE_EDITABLE_ATTRIBUTES,
         serverLogFileName: "log/serverErrorLog.txt",
         usersLogFileName: "log/usersLog.txt"
     };
