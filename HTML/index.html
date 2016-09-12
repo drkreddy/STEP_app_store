@@ -9,6 +9,7 @@
     <script type="text/javascript" src="libraries/http_cdnjs.cloudflare.com_ajax_libs_moment.js_2.14.1_moment.js"></script>
     <script type="text/javascript" src="libraries/http_cdnjs.cloudflare.com_ajax_libs_moment-timezone_0.5.5_moment-timezone-with-data.js"></script>
     <script type="text/javascript" src="init.js"></script>
+    <script src="service/formValidationService.js"></script>
     <script type="text/javascript" src="controller/indexController.js"></script>
     <script type="text/javascript" src="factories/indexFactory.js"></script>
     <link rel="stylesheet" href="styles/index.css">
@@ -138,6 +139,39 @@
 
                         </tbody>
                     </table>
+                </div>
+                <div class="modal-footer">
+                    <div ng-if="details.uploadedbyuserid === userId">
+                        <a href="#" class="btn btn-info btn-lg" data-toggle="modal" data-target="#edit-modal">
+                            <span class="glyphicon glyphicon-edit"></span> Edit
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL EDIT A PROJECT -->
+    <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="panel">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="editModalLabel">Edit</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form" action="{{'/submit/project/' + details.uuid}}" method="post" onsubmit="return validateFormData()">
+                            <!--  -->
+                            <div class="form-group modal-footer">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
