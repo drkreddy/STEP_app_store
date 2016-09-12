@@ -103,7 +103,7 @@ app.get("^/logout$", function (req, res) {
 
 app.post("^/login$", login);
 
-app.post("^/submit$", isAlreadyLogedIn, submitProject);
+app.post("^/submit/project$", isAlreadyLogedIn, submitProject);
 
 app.post("^/submit/project/:uuid$", isAlreadyLogedIn, updateProject);
 
