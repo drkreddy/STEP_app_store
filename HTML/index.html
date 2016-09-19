@@ -43,20 +43,19 @@
         </div>
     </nav>
 <div class="container-fluid margin-top">
-    <div class="row card-row">
-        <div class="card col-xs-12 col-sm-6 col-md-3" ng-repeat="project in projects">
-            <div class="inner">
-                <div class="card-block">
-                    <h4 class="card-title">{{project.projectname}}</h4>
-                    <div class="card-description">{{project.briefdescription}}</div>
-                </div>
-                <div class="card-block">
-                    <a  ng-if="project.websitelink != ''" href="{{project.websitelink}}" target="_blank" class="card-link small-char">Game here</a>
-                    <a ng-if="project.sourceLink != ''" href="{{project.sourcelink}}" target="_blank" class="card-link small-char">Code here</a>
-                </div>
-                <div class="details">
-                    <a data-toggle="modal" data-target="#details-modal" ng-click="getDetails(project.uuid)"> Details...</a>
-                </div>
+    <div class="menu row">
+        <div class="menu-category block" ng-repeat="project in projects" data-toggle="modal" data-target="#details-modal" ng-click="getDetails(project.uuid)">
+            <div class="">
+                <h4 class="card-title">{{project.projectname}}</h4>
+                
+            </div>
+            <div>
+                <img src="photo.jpg" width="100%" height="60%" />
+            </div>
+            <div class=""> {{project.briefdescription}} </div>
+            <hr>
+            <div class="">
+                Developed by : <label ng-if="project.developedby != ''" class="small-char"> {{ project.developedby }} </label>
             </div>
         </div>
     </div>

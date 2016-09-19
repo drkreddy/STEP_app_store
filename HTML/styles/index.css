@@ -13,3 +13,27 @@
 .modal-title {
     background: #FCF8C8;
 }
+
+*, *:before, *:after {box-sizing:  border-box !important;}
+
+
+.row {
+ -moz-column-width: 18em;
+ -webkit-column-width: 18em;
+ -moz-column-gap: 1em;
+ -webkit-column-gap: 1em; 
+  
+}
+
+.menu-category {
+ display: inline-block;
+ margin:  0.25rem;
+ padding:  1rem;
+ width:  100%; 
+}
+
+.block {
+	cursor: pointer;
+	margin-bottom: 11px;
+	background-color: #DFDFDF;
+}
