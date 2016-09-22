@@ -3,6 +3,7 @@ StepAppStore.entrance.controller("StepAppStore.entrance.index", ['$scope', '$htt
     Projects.all().then(function (projects) {
         projects.forEach(function (project) {
             project.uploadedon = moment(new Date(project.uploadedon).toISOString()).tz('Asia/Kolkata').format('DD-MM-YYYY hh:mma');
+            project.projectlogo = project.projectlogo || "images/logos/defaultLogo.jpg";
         });
         $scope.projects = projects;
     });

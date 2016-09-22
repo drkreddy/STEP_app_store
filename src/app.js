@@ -1,7 +1,9 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
+var fileUpload = require('express-fileupload');
 var uuid = require("uuid");
+var blobUtil = require("blob-util");
 
 var dbLib = require("./databaseManager.js");
 var constants = require("./constants.js");
@@ -33,11 +35,31 @@ var insertToDB = function (req, res, query) {
     });
 };
 
+var getExtension = function (actualFileName) {
+    var extension = actualFileName.split(".")[1];
+    return extension ? "." + extension : "";
+};
+
+var createFilePath = function (uuid, actualFileName) {
+    return constants.logosPath + uuid + getExtension(actualFileName);
+};
+
+var handelFileUpload = function (projectUuid, files) {
+    if (files.projectLogo.name) {
+        var fileName = createFilePath(projectUuid, files.projectLogo.name);
+        logger.createLog("HTML/" + fileName, files.projectLogo.data);
+        return fileName;
+    }
+    return "";
+};
 var submitProject = function (req, res) {
     var username = req.cookies.username || "";
     var userId = req.cookies.userId || "";
     var body = req.body;
-    var values = [uuid.v4(), body.projectName, body.siteLink, body.briefDescription, body.sourceLink, body.usedLanguages, body.usedFrameworks, body.developedBy, username, new Date().toISOString(), userId];
+    var projectUuid = uuid.v4();
+    console.log(req.files)
+    var fileName = handelFileUpload(projectUuid, req.files);
+    var values = [projectUuid, body.projectName, body.siteLink, body.briefDescription, body.sourceLink, body.usedLanguages, body.usedFrameworks, body.developedBy, username, new Date().toISOString(), userId, fileName];
     var query = dbLib.makeInsertQuery(constants.projectTableName, constants.projectTableAttributes, values);
     insertToDB(req, res, query);
 };
@@ -76,6 +98,8 @@ app.use(cookieParser());
 
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use(fileUpload());
+
 app.use(library.updateCookies);
 
 app.get("^/uploadNewProject.html$", isAlreadyLogedIn);
@@ -91,7 +115,11 @@ var isLoggedIn = function (cookies) {
 };
 
 app.get("^/personalDetails$", function (req, res) {
-    res.send({isLoggedIn: isLoggedIn(req.cookies), username: (req.cookies.username || "user"), userId: req.cookies.userId});
+    res.send({
+        isLoggedIn: isLoggedIn(req.cookies),
+        username: (req.cookies.username || "user"),
+        userId: req.cookies.userId
+    });
 });
 
 app.get("^/logout$", function (req, res) {

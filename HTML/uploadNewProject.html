@@ -21,7 +21,7 @@
         <h3 class="panel-title">Project Information</h3>
     </div>
     <div class="panel-body">
-        <form class="form-horizontal" role="form" action="/submit/project" method="post" onsubmit="return validateFormData()">
+        <form class="form-horizontal" role="form" action="/submit/project" method="post" enctype="multipart/form-data" onsubmit="return validateFormData()">
             <div class="form-group">
                 <label for="projectName" class="col-lg-2 control-label">Project name:</label>
                 <div class="col-lg-10">
@@ -75,6 +75,13 @@
                     <input type="text" name="developedBy" id="developedBy"
                            title="Provide project team members name as CSV text"
                            placeholder="Provide project team members name as CSV text" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="logo" class="col-lg-2 control-label">Project logo:</label>
+                <div class="col-lg-10">
+                    <input type="file" name="projectLogo" id="logo" accept="image/*"
+                           title="Provide project logo">
                 </div>
             </div>
             <div class="form-group">
