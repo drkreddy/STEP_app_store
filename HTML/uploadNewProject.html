@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="styles/http_maxcdn.bootstrapcdn.com_bootstrap_3.3.7_css_bootstrap.min.css">
     <link rel="stylesheet" href="styles/uploadNewProject.css">
     <script src="service/formValidationService.js"></script>
+    <script src="service/previewService.js"></script>
     <script src="controller/uploadNewProjectController.js"></script>
 </head>
 <body>
@@ -82,7 +83,7 @@
                 <label for="logo" class="col-lg-2 control-label">Project logo:</label>
                 <div class="col-lg-10">
                     <input type="file" name="projectLogo" id="logo" accept="image/*"
-                           title="Provide project logo">
+                           title="Provide project logo" onchange="previewImage(this)">
                 </div>
             </div>
             <div class="form-group">
