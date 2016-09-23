@@ -17,3 +17,16 @@
 .fa-tasks:before {
     content: "\f0ae";
 }
+
+.required-field:after {
+    color: #d00;
+    content: "*";
+    position: absolute;
+    margin-left: 3px;
+    top: 10px;
+}
+
+#notes > h6 {
+    float: right;
+    color: #d00;
+}
