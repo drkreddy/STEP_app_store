@@ -3,7 +3,6 @@ var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var fileUpload = require('express-fileupload');
 var uuid = require("uuid");
-var blobUtil = require("blob-util");
 
 var dbLib = require("./databaseManager.js");
 var constants = require("./constants.js");
@@ -57,7 +56,6 @@ var submitProject = function (req, res) {
     var userId = req.cookies.userId || "";
     var body = req.body;
     var projectUuid = uuid.v4();
-    console.log(req.files)
     var fileName = handelFileUpload(projectUuid, req.files);
     var values = [projectUuid, body.projectName, body.siteLink, body.briefDescription, body.sourceLink, body.usedLanguages, body.usedFrameworks, body.developedBy, username, new Date().toISOString(), userId, fileName];
     var query = dbLib.makeInsertQuery(constants.projectTableName, constants.projectTableAttributes, values);
