@@ -29,37 +29,30 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-fixed-top bg-warning">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#"><span><img src="images/logo.png" alt="StepAppsStore" height="25"></span></a>
-            </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li id="uploadNewProject"><a href="/uploadNewProject.html"><span class="glyphicon glyphicon-cloud-upload"></span> Upload New Project</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{username}}</a></li>
-                <li><a ng-if="!isLoggedIn" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                <li><a href="/logout" ng-if="isLoggedIn"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-            </ul>
-        </div>
-    </nav>
-<div class="container-fluid margin-top">
-    <div class="menu row">
-        <div class="menu-category block" ng-repeat="project in projects" data-toggle="modal" data-target="#details-modal" ng-click="getDetails(project.uuid)">
-            <div class="">
-                <h4 class="card-title">{{project.projectname}}</h4>
-                
-            </div>
-            <div>
-                <img ng-src={{project.projectlogo}} width="100%" height="60%" />
-            </div>
-            <div class=""> {{project.briefdescription}} </div>
-            <hr>
-            <div class="">
-                Developed by : <label ng-if="project.developedby != ''" class="small-char"> {{ project.developedby }} </label>
+    <div ng-include="'header.html'"></div>
+    <div id="wrapper">
+        <div id="main-wrapper" class="col-md-12">
+            <div id="main">
+              <!-- <div class="page-header"></div> -->
+                    <div class="menu row">
+                        <div class="menu-category block" ng-repeat="project in projects" data-toggle="modal" data-target="#details-modal" ng-click="getDetails(project.uuid)">
+                            <div class="">
+                                <h4 class="card-title">{{project.projectname}}</h4>
+                                
+                            </div>
+                            <div>
+                                <img ng-src={{project.projectlogo}} width="100%" height="60%" />
+                            </div>
+                            <div class=""> {{project.briefdescription}} </div>
+                            <hr>
+                            <div class="">
+                                Developed by : <label ng-if="project.developedby != ''" class="small-char"> {{ project.developedby }} </label>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
-</div>
     <div ng-include="'footer.html'"></div>
 
     <!-- MODAL FOR LOGIN -->

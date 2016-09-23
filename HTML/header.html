@@ -1,0 +1,33 @@
+<div id="header" class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+            <i class="icon-reorder"></i>
+        </button>
+        <a class="navbar-brand" href="#"><span><img src="images/logo.png" alt="StepAppsStore" height="30px"></span></a>
+    </div>
+    <nav class="collapse navbar-collapse">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav navbar-right">
+                <li id="uploadNewProject"><a href="/uploadNewProject.html"><span class="glyphicon glyphicon-cloud-upload"></span> Upload New Project</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{username}}</a></li>
+                <li><a ng-if="!isLoggedIn" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="/logout" ng-if="isLoggedIn"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+        </div> 
+    </nav>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
