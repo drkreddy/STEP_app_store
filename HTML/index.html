@@ -38,7 +38,6 @@
                         <div class="menu-category block" ng-repeat="project in projects" data-toggle="modal" data-target="#details-modal" ng-click="getDetails(project.uuid)">
                             <div class="">
                                 <h4 class="card-title">{{project.projectname}}</h4>
-                                
                             </div>
                             <div>
                                 <img ng-src={{project.projectlogo}} width="100%" height="60%" />
@@ -59,27 +58,21 @@
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="panel">
-                <div class="panel-heading modal-title">
+                <div class="panel-heading ">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title" id="myModalLabel">Login here</h4>
                 </div>
                 <div class="modal-body">
                     <div id="fb-root"></div>
-                    <div id="container">
-                        <button id="login_btn" onclick="login()">Login With Facebook</button>
+                    <div id="button_container">
+                        <img id="login_btn" ng-src="images/loginwithfacebook.png" onclick="login()"/>
                         <div id="login_status"></div>
-                    </div>
-                    <div id="login-message">
-                        <h4 id="waiting-message">You will be redirect to next page </h4>
-                        <div class="waiting">
-                            <div class="waiting_dots" id="dot_0"></div>
-                            <div class="waiting_dots" id="dot_1"></div>
-                            <div class="waiting_dots" id="dot_2"></div>
+                        <div id="login-message">
+                            <h4 id="waiting-message">You will be redirect to next page </h4>
+                            <div class="waiting">
+                                <img ng-src="images/spin.gif"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <!-- Forgot password ? Click here -->
                 </div>
             </div>
         </div>
@@ -89,9 +82,9 @@
     <div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="panel">
-                <div class="panel-heading modal-title">
+                <div class="panel-heading">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title" id="detailsModalLabel">{{details.projectname}}</h4>
+                    <h4 id="detailsModalLabel">{{details.projectname}}</h4>
                 </div>
                 <div class="modal-body">
                     <table class="table table-striped">
