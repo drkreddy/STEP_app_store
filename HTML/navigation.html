@@ -12,6 +12,7 @@
             <li id="uploadNewProject"><a href="/uploadNewProject.html"><span
                     class="glyphicon glyphicon-cloud-upload"></span> Upload New Project</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-user" id="user"></span> {{username}}</a></li>
+            <li><a href="/login" ng-if="!isLoggedIn"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li><a href="/logout" ng-if="isLoggedIn"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
     </div>
