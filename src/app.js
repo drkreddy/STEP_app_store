@@ -103,6 +103,7 @@ app.use(fileUpload());
 app.use(library.updateCookies);
 
 app.get("^/uploadNewProject.html$", isAlreadyLogedIn);
+app.get("^/edit.html", isAlreadyLogedIn);
 
 app.use(express.static('HTML'));
 
