@@ -23,10 +23,11 @@ dbLib.makeRetrieveQuery = function (tableName, condition) {
 
 dbLib.makeUpdateQuery = function (tableName, attributes, values, uuid) {
     var query = "update " + tableName + " set ";
-    for (var index = 0; index < attributes.length; index++) {
-        query += attributes[index] + "='" + values + "' ";
+    var attributesLength = attributes.length;
+    for (var index = 0; index < attributesLength -1 ; index++) {
+        query += attributes[index] + "='" + values[index] + "', ";
     }
-    query += "where uuid='" + uuid + "';";
+    query += attributes[attributesLength -1 ] + "='" + values[attributesLength - 1] + "' where uuid='" + uuid + "';"
     return query;
 };
 
