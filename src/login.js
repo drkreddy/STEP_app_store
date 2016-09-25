@@ -3,7 +3,7 @@ var moment = require('moment-timezone');
 var library = require("./library.js");
 var logger = require("./logger.js");
 var constants = require("./constants.js");
-var logFileName = "usersLog/usersLog.txt";
+var queryString = require('query-string');
 
 var generateGroupAccessUrl = function (accessToken, groupId) {
     return "https://graph.facebook.com/v2.7/" + groupId + "?fields=members.limit(10000)&access_token=" + accessToken;
@@ -20,6 +20,7 @@ var isAGroupMember = function (members, currentUserId) {
 };
 
 module.exports = function (req, res, groupId) {
+    var query = queryString.parse(queryString.extract(req.url));
     var accessToken = req.body.accessToken;
     var userId = req.body.userId;
     var groupUrl = generateGroupAccessUrl(accessToken, groupId);
@@ -35,7 +36,7 @@ module.exports = function (req, res, groupId) {
                             var username = responseData.name;
                             library.setCookie(req, res, {key: "userId", value: userId});
                             library.setCookie(req, res, {key: "username", value: username});
-                            res.send({redirectTo: "/uploadNewProject.html"});
+                            res.send({redirectTo: query.action || "/"});
                         });
                 } else {
                     res.send({redirectTo: "/rejection.html"});

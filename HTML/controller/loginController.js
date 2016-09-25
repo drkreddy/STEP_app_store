@@ -2,6 +2,18 @@ window.onload = function () {
     $("#login-message").hide();
 };
 
+var parseQueryString = function (qs) {
+    var result = {};
+    var pairs = qs.split('&');
+    pairs.forEach(function (pair) {
+        var data = pair.split('=');
+        var key = data[0];
+        result[key] = decodeURIComponent(data[1] || '');
+    });
+
+    return JSON.parse(JSON.stringify(result));
+};
+
 var login = function () {
     FB.init({
         appId: '188475074847404',
@@ -12,13 +24,15 @@ var login = function () {
 
     FB.login(function (response) {
         if (response.authResponse) {
-
-            // setInterval(500);
             $('#login_btn').hide();
             $('#myModalLabel').hide();
             $("#login-message").show();
             console.log('Welcome!  Fetching your information.... ');
-            jQuery.post("/login", {
+            var qs = $(location).attr("search").slice(1);
+            var url = "/login";
+            if (parseQueryString(qs).action)
+                url += "?action=" + parseQueryString(qs).action;
+            jQuery.post(url, {
                 accessToken: response.authResponse.accessToken,
                 userId: response.authResponse.userID
             }, function (response) {

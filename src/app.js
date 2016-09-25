@@ -19,7 +19,8 @@ var login = function (req, res) {
 };
 
 var isAlreadyLogedIn = function (req, res, next) {
-    (req.cookies.userId && req.cookies.username) ? next() : res.redirect("/login.html");
+    var url = "/login.html?action=" + req.url;
+    (req.cookies.userId && req.cookies.username) ? next() : res.redirect(url);
 };
 
 var insertToDB = function (req, res, query) {
@@ -130,7 +131,7 @@ app.get("^/logout$", function (req, res) {
     res.redirect("/index.html");
 });
 
-app.post("^/login$", login);
+app.post("^/login", login);
 
 app.post("^/submit/project$", isAlreadyLogedIn, submitProject);
 
