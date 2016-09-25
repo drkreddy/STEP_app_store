@@ -19,7 +19,8 @@ StepAppStore.edit.controller("StepAppStore.edit.controller", ['$scope', '$http',
         $("#usedLanguages").val(data.usedlanguages);
         $("#usedFrameworks").val(data.usedframeworks);
         $("#developedBy").val(data.developedby);
-        $("#logo").val(data.projectlogo);
+        //$("#logo").val(data.projectlogo);
+        $("#overlay").fadeOut();
     };
 
     $.get("/personalDetails", function (data) {
