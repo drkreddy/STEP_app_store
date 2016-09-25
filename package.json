@@ -1,5 +1,5 @@
 {
-  "name": "step15",
+  "name": "STEPAppsStore",
   "version": "1.0.0",
   "description": "It will hold all project made by STEP-2015 interns",
   "main": "server.js",
@@ -24,10 +24,10 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sumanmaity112/STEP15Site.git"
+    "url": "git+https://github.com/sumanmaity112/STEPAppsStore.git"
   },
   "bugs": {
-    "url": "https://github.com/sumanmaity112/STEP15Site/issues"
+    "url": "https://github.com/sumanmaity112/STEPAppsStore/issues"
   },
-  "homepage": "https://github.com/sumanmaity112/STEP15Site#readme"
+  "homepage": "https://github.com/sumanmaity112/STEPAppsStore#readme"
 }
