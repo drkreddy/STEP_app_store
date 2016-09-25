@@ -49,7 +49,7 @@ var handelFileUpload = function (projectUuid, files) {
         logger.createLog("HTML/" + fileName, files.projectLogo.data);
         return fileName;
     }
-    return "";
+    return "images/logos/defaultLogo.jpg";
 };
 var submitProject = function (req, res) {
     var username = req.cookies.username || "";
@@ -64,8 +64,10 @@ var submitProject = function (req, res) {
 
 var updateProject = function (req, res) {
     var body = req.body;
-    var values = [body.projectName, body.siteLink, body.briefDescription, body.sourceLink, body.usedLanguages, body.usedFrameworks, body.developedBy, new Date().toISOString()];
-    var query = dbLib.makeUpdateQuery(constants.projectTableName, constants.projectTableEditableAttributes, values, req.params.uuid);
+    var projectUuid = req.params.uuid;
+    var fileName = handelFileUpload(projectUuid, req.files);
+    var values = [body.projectName, body.siteLink, body.briefDescription, body.sourceLink, body.usedLanguages, body.usedFrameworks, body.developedBy, new Date().toISOString(), fileName];
+    var query = dbLib.makeUpdateQuery(constants.projectTableName, constants.projectTableEditableAttributes, values, projectUuid);
     console.log(query);
     insertToDB(req, res, query)
 };
