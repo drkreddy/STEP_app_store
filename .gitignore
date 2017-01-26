@@ -1,4 +1,6 @@
 node_modules
 npm-debug.log
 log/*.txt
-HTML/images/logos/*.jpeg
+HTML/images/logos/*.jpg
+HTML/images/logos/*.gif
+HTML/images/logos/*.png
