@@ -9,9 +9,14 @@
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-right">
                 <li id="uploadNewProject"><a href="/uploadNewProject.html"><span class="glyphicon glyphicon-cloud-upload"></span> Upload New Project</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{username}}</a></li>
-                <li><a ng-if="!isLoggedIn" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                <li><a href="/logout" ng-if="isLoggedIn"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> {{username}}
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a ng-if="!isLoggedIn" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                      <li><a href="/logout" ng-if="isLoggedIn"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                    </ul>
+                </li>
             </ul>
         </div> 
     </nav>

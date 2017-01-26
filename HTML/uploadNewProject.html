@@ -4,16 +4,26 @@
     <meta charset="UTF-8">
     <title>Submit new project</title>
     <script src="libraries/http_code.jquery.com_jquery-3.1.0.js"></script>
-    <script type="text/javascript"
-            src="libraries/http_ajax.googleapis.com_ajax_libs_angularjs_1.4.8_angular.js"></script>
+    <script type="text/javascript" src="libraries/http_ajax.googleapis.com_ajax_libs_angularjs_1.4.8_angular.js"></script>
     <script src="init.js"></script>
     <link rel="stylesheet" href="styles/http_maxcdn.bootstrapcdn.com_bootstrap_3.3.7_css_bootstrap.min.css">
     <script src="controller/uploadNewProjectController.js"></script>
+
+    <script src="libraries/http_code_google_apis_jquery.min.js"></script>
+	<script src="libraries/http_netdna_3.1.1_bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles/http_netdna_3.1.1_bootstrap.min.css">
+
+    <style type="text/css">
+    	body {
+    		padding-top: 60px;
+    	}
+    </style>
 </head>
 <body>
-<div ng-include="'navigation.html'"></div>
+	<div ng-include="'header.html'"></div>
+	<!-- <div ng-include="'navigation.html'"></div> -->
 
-<div ng-include="'uploadForm.html'"></div>
-<div ng-include="'footer.html'"></div>
+	<div ng-include="'uploadForm.html'"></div>
+<!-- <div ng-include="'footer.html'"></div> -->
 </body>
 </html>

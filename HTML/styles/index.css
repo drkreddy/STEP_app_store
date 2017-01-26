@@ -9,6 +9,7 @@
 .small-char {
     font-size: 12px;
     word-break: break-all;
+    font-weight: normal;   
 }
 
 .modal-title {
@@ -68,7 +69,7 @@ body {
     font: 1em/1.67 'Open Sans', Arial, Sans-serif;
     margin: 0;
     background: #e6e6e6;
-    padding-top: 20px;
+    padding-top: 30px;
 }
 
 .wrapper {
