@@ -39,6 +39,9 @@
             <div class="project-description">
                 {{project.briefdescription}}
             </div>
+            <a href="#">
+                <label class="float-right-label" data-toggle="modal" data-target="#details-modal" ng-click="getDetails(project.uuid)"> ... more</label>
+            </a>
             <hr>
             <label>Developed by : </label>
             <label class="small-char" ng-if="project.developedby != ''" class="small-char"> {{ project.developedby }} </label></br>
