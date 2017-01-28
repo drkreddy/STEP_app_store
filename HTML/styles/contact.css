@@ -1,23 +1,16 @@
-h1 {
-    font-size: 22px;
-    color: rgba(0, 0, 0, 0.80);
-}
-
-.name a.names:hover {
-    color: #4078c0;
-    text-decoration: none;
+.detail {
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .name {
-    width: 50%;
-    margin: 0 auto;
+    font-weight: bold;
+    font-size: 2em;
 }
 
 .contacts {
     text-decoration: none;
-    font-size: 18px;
     color: rgba(0, 0, 0, 0.90);
-    line-height: 2.2;
 }
 
 .contacts:hover {
@@ -25,14 +18,23 @@ h1 {
     text-decoration: none;
 }
 
-.contactBody {
-    padding-top: calc(8% - 1em);
-    padding-left: calc(18% - 1em);
-    padding-right: calc(18% - 1em);
+.link {
+    float: left;
+    font-size: 30px;
 }
 
-.email {
-    padding-top: calc(5% - 1em);
-    padding-left: calc(40% - 1em);
-    padding-right: calc(40% - 1em);
+.developer-details :hover {
+    border-color: #616161;
+    transition: border-color 1s ease-in-out;
+    -moz-transition: border-color 1s ease-in-out;
+    -webkit-transition: border-color 1s ease-in-out;
+    background-color: #f1f1f1;
+    transition: background-color 0.5s ease-in-out;
+    -moz-transition: background-color 0.5s ease-in-out;
+    -webkit-transition: background-color 0.5s ease-in-out;
 }
+
+ .bold_heading{
+    font-weight: normal;
+    font-size: 20px;
+ }
