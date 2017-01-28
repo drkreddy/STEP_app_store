@@ -1,13 +1,28 @@
-<div id="header" class="navbar navbar-default navbar-fixed-top">
+<style type="text/css">
+    .navbar-default .navbar-nav > li > a {
+        color: #ffffff;
+    }
+
+    ul.nav li:hover { 
+        color: #000 !important; 
+        background-color: #ffffff;
+    }
+
+    .navbar-header{
+        box-shadow: 3px 3px 3px grey;        
+    }
+
+</style>
+<div id="header" class="navbar navbar-default navbar-fixed-top" style="background-color: #616161; color: white">
     <div class="navbar-header">
-        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-            <i class="icon-reorder"></i>
-        </button>
-        <a class="navbar-brand" href="/"><span><img src="images/logo.png" alt="StepAppsStore" height="30px"></span></a>
+        <a class="navbar-brand" href="/" style="background-color: #fffeff"><span><img src="images/logo.png" alt="StepAppsStore" height="20px"></span></a>
     </div>
     <nav class="collapse navbar-collapse">
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-right">
+                <li id="about" class="nav-tab"><a href="https://raw.githubusercontent.com/sumanmaity112/STEP15Site/master/README.md"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
+                <li id="contact" class="nav-tab"><a href="contact.html"><span class="glyphicon glyphicon-phone-alt"></span> Contact</a></li>
+                <li id="github" class="nav-tab"><a href="https://github.com/sumanmaity112/STEP15Site"><i class="fa fa-github" style="font-size: 18px"></i> Github</a></li>
                 <li id="uploadNewProject"><a href="/uploadNewProject.html"><span class="glyphicon glyphicon-cloud-upload"></span> Upload New Project</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> {{username}}
@@ -21,18 +36,3 @@
         </div> 
     </nav>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
