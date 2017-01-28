@@ -11,12 +11,13 @@
 
     <script src="init.js"></script>
     <script src="controller/loginController.js"></script>
-    <link rel="stylesheet" href="styles/waiting.css">
+    <link rel="stylesheet" href="styles/login.css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="styles/http_maxcdn.bootstrapcdn.com_bootstrap_3.3.7_css_bootstrap.min.css">
     <script src="libraries/http_code_google_apis_jquery.min.js"></script>
     <script src="libraries/http_netdna_3.1.1_bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/http_netdna_3.1.1_bootstrap.min.css">
+    <link rel="stylesheet" href="styles/font-awesome.min.css">
     <style type="text/css">
         body {
             padding-top: 60px;
@@ -27,8 +28,10 @@
 <div ng-include="'header.html'"></div>
 <div id="fb-root"></div>
 <div id="container">
-    <img id="login_btn" ng-src="images/loginwithfacebook.png" onclick="login()"/>
-    <div id="login_status"></div>
+    <div class="button-holder">
+        <img id="login_btn" ng-src="images/loginwithfacebook.png" onclick="login()"/>
+        <div id="login_status"></div>
+    </div>
 </div>
 <div id="login-message">
     <h2>You will be redirect to next page </h2>

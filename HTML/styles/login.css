@@ -1,0 +1,21 @@
+.waiting {
+    width: 150px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+#login-message {
+    text-align: center;
+}
+
+#container {
+	height: 700px;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-holder {
+	max-width: 50%;
+	cursor: pointer;	
+}
