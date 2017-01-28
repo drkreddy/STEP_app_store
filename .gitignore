@@ -4,3 +4,5 @@ log/*.txt
 HTML/images/logos/*.jpg
 HTML/images/logos/*.gif
 HTML/images/logos/*.png
+HTML/images/Welcome_files/
+local/
